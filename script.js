@@ -72,6 +72,11 @@ calculator.addEventListener("click", (e) => {
         isNumberSecondSetup = false;
         isOperatorSetup = false;
     }
+
+    // RESULT
+    if(e.target.innerText == "=" && isNumberFirstSetup == true && isNumberSecondSetup == true && isOperatorSetup == true) {
+       
+    }
     
 })
 
