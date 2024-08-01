@@ -29,11 +29,16 @@ calculator.addEventListener("click", (e) => {
         e.target.innerText != "÷" &&
         e.target.innerText != "=" &&
         e.target.innerText != "CLEAR" &&
-        e.target.id != "calculator__result"
+        e.target.id != "calculator__result" &&
+        !isNumberFirstSetup &&
+        !isOperatorSetup
     )
     {
         tempArray.push(e.target.innerText);
-        console.log(tempArray);
+        numberFirst = tempArray.reduce((accumulator, currentValue) => {
+            return accumulator += currentValue;
+        });
+        refreshDisplay()
     } else if(
         e.target.innerText == "+" ||
         e.target.innerText == "-" ||
@@ -42,26 +47,29 @@ calculator.addEventListener("click", (e) => {
     )
     {
         // Create first number until user setup operator
+        // Tell JS that firstNumber is setup and co cleanup
         console.log("time for operator");
-        numberFirst = tempArray.reduce((accumulator, currentValue) => {
-            return accumulator =+ currentValue;
-        });
-        refreshDisplay()
         tempArray = [];
         isNumberFirstSetup = true;
-
 
         //  Setup operator
         operator = e.target.innerText;
         refreshDisplay()
         tempArray = [];
         isOperatorSetup = true;
+
+        // Setup 2 number if 1number and operator is setup
+    } else if(isNumberFirstSetup && isOperatorSetup)
+    {
+        tempArray.push(e.target.innerText);
+        numberSecond = tempArray.reduce((accumulator, currentValue) => {
+            return accumulator += currentValue;
+        });
+        refreshDisplay()
+    } else if(e.target.innerText == "=") {
+        
     }
         
-    // Operator
-
-        
-    // Second Number
   
     // Clear
     if(e.target.innerText == "CLEAR") {
