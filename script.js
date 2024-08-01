@@ -41,19 +41,36 @@ isOperatorSetup = false;
 calculator.addEventListener("click", (e) => {
     // First Number
     if(isNumberFirstSetup == false && isNumberSecondSetup == false && isOperatorSetup == false) {
-        numberFirst = e.target.innerText;
-        refreshDisplay();
-        isNumberFirstSetup = true;
+        if(e.target.innerText != "+" && e.target.innerText != "-" && e.target.innerText != "x" && e.target.innerText != "÷") {
+            numberFirst = e.target.innerText;
+            refreshDisplay();
+            isNumberFirstSetup = true;
+        }
     // Operator
-    } else if(isNumberFirstSetup == true && isNumberSecondSetup == false && isOperatorSetup == false) {
-        operator = e.target.innerText;
-        refreshDisplay();
-        isOperatorSetup= true;
+    } else if(isNumberFirstSetup == true && isNumberSecondSetup == false && isOperatorSetup == false ) {
+        if(e.target.innerText == "+" || e.target.innerText == "-" || e.target.innerText == "x" || e.target.innerText == "÷") {
+            operator = e.target.innerText;
+            refreshDisplay();
+            isOperatorSetup= true;
+        }
+        
     // Second Number
     } else if(isNumberFirstSetup == true && isNumberSecondSetup == false && isOperatorSetup == true) {
-        numberSecond = e.target.innerText;
+        if(e.target.innerText != "+" && e.target.innerText != "-" && e.target.innerText != "x" && e.target.innerText != "÷") {
+            numberSecond = e.target.innerText;
+            refreshDisplay();
+            isNumberSecondSetup = true;
+        }
+    }
+    // Clear
+    if(e.target.innerText == "CLEAR") {
+        numberFirst = 0;
+        numberSecond = 0;
+        operator = "";
         refreshDisplay();
-        isNumberSecondSetup = true;
+        isNumberFirstSetup = false;
+        isNumberSecondSetup = false;
+        isOperatorSetup = false;
     }
     
 })
