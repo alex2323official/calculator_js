@@ -21,28 +21,24 @@ isOperatorSetup = false;
 
 calculator.addEventListener("click", (e) => {
     // First Number
-    if(isNumberFirstSetup == false && isNumberSecondSetup == false && isOperatorSetup == false) {
-        if(e.target.innerText != "+" && e.target.innerText != "-" && e.target.innerText != "x" && e.target.innerText != "÷") {
-            numberFirst = e.target.innerText;
-            refreshDisplay();
-            isNumberFirstSetup = true;
-        }
+    if(
+        e.target.innerText != "+" &&
+        e.target.innerText != "-" &&
+        e.target.innerText != "x" &&
+        e.target.innerText != "÷" &&
+        e.target.innerText != "=" &&
+        e.target.innerText != "CLEAR" &&
+        e.target.id != "calculator__result"
+    )
+    {
+        console.log("number");
+    }
+        
     // Operator
-    } else if(isNumberFirstSetup == true && isNumberSecondSetup == false && isOperatorSetup == false ) {
-        if(e.target.innerText == "+" || e.target.innerText == "-" || e.target.innerText == "x" || e.target.innerText == "÷") {
-            operator = e.target.innerText;
-            refreshDisplay();
-            isOperatorSetup= true;
-        }
+
         
     // Second Number
-    } else if(isNumberFirstSetup == true && isNumberSecondSetup == false && isOperatorSetup == true) {
-        if(e.target.innerText != "+" && e.target.innerText != "-" && e.target.innerText != "x" && e.target.innerText != "÷") {
-            numberSecond = e.target.innerText;
-            refreshDisplay();
-            isNumberSecondSetup = true;
-        }
-    }
+  
     // Clear
     if(e.target.innerText == "CLEAR") {
         numberFirst = 0;
