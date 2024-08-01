@@ -33,7 +33,7 @@ body {
 
 #calculator__result {
   font-size: 20px;
-  min-width: 80px;
+  min-width: 400px;
   font-weight: 900;
   color: #d6bd98;
 }
@@ -42,3 +42,5 @@ body {
   font-size: 16px;
   font-weight: 900;
 }
+
+
