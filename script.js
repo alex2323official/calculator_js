@@ -1,23 +1,4 @@
-// Your calculator is going to contain functions for all of the basic math operators you typically find on calculators, so start by creating functions for the following items and testing them in your browser’s console.
-
-// 1. Operators
-function add(a, b) {
-  return a + b;
-}
-
-function subtract(a, b) {
-  return a - b;
-}
-
-function multiply(a, b) {
-  return a * b;
-}
-
-function divide(a, b) {
-  return a / b;
-}
-
-// 2. Setup basic variables
+//  Setup basic variables
 let calculator = document.querySelector(".calculator");
 let result = document.querySelector("#calculator__result");
 
@@ -75,7 +56,30 @@ calculator.addEventListener("click", (e) => {
 
     // RESULT
     if(e.target.innerText == "=" && isNumberFirstSetup == true && isNumberSecondSetup == true && isOperatorSetup == true) {
-       
+        // Parse numbers
+        numberFirst = Number(numberFirst);
+        numberSecond = Number(numberSecond);
+
+        // OPERATIONS
+       if(operator == "+") {
+            display = numberFirst + numberSecond;
+            result.innerText = display;
+       }
+
+       if(operator == "-") {
+            display = numberFirst - numberSecond;
+            result.innerText = display;
+        }
+
+        if(operator == "x") {
+            display = numberFirst * numberSecond;
+            result.innerText = display;
+        }
+
+        if(operator == "÷") {
+            display = numberFirst / numberSecond;
+            result.innerText = display;
+        }
     }
     
 })
