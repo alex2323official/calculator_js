@@ -5,6 +5,7 @@ let result = document.querySelector("#calculator__result");
 let numberFirst = "";
 let numberSecond = "";
 let operator = "";
+let numberThird = "";
 let display = `${numberFirst} ${operator} ${numberSecond}`;
 result.innerText = display;
 
@@ -15,12 +16,30 @@ function refreshDisplay() {
 }
 
 // Setup 1 number + operator + 2 number
-isNumberFirstSetup = false;
-isNumberSecondSetup = false;
-isOperatorSetup = false;
+let isNumberFirstSetup = false;
+let isNumberSecondSetup = false;
+let isOperatorSetup = false;
+let isResultSetup = false;
 let tempArray = [];
 
+
 calculator.addEventListener("click", (e) => {
+
+    // setup old numer
+    if(numberThird != "") {
+        numberFirst = numberThird;
+        numberSecond = "";
+        operator = "";
+        numberThird = "";
+        isNumberFirstSetup = true;
+        isOperatorSetup = false;
+        isNumberSecondSetup = false;
+        isResultSetup = false;
+        tempArray = [];
+        refreshDisplay()
+    }
+
+
     // First Number
     if(
         e.target.innerText != "+" &&
@@ -49,6 +68,7 @@ calculator.addEventListener("click", (e) => {
         // Create first number until user setup operator
         // Tell JS that firstNumber is setup and do cleanup
         tempArray = [];
+
         isNumberFirstSetup = true;
 
         //  Setup operator
@@ -69,7 +89,7 @@ calculator.addEventListener("click", (e) => {
     }
 
     // Result!
-    if(e.target.innerText == "=") {
+    if(e.target.innerText == "=" && isResultSetup == false) {
         // Tell JS that secondNumber is setup and do cleanup
         tempArray = [];
         isNumberSecondSetup = true;
@@ -80,24 +100,40 @@ calculator.addEventListener("click", (e) => {
 
         // OPERATIONS
        if(operator == "+") {
+            numberThird = numberFirst + numberSecond;
             display = numberFirst + numberSecond;
             result.innerText = display;
+            isResultSetup = true;
        }
 
        if(operator == "-") {
+            numberThird = numberFirst - numberSecond;
             display = numberFirst - numberSecond;
             result.innerText = display;
+            isResultSetup = true;
         }
 
         if(operator == "x") {
+            numberThird = numberFirst * numberSecond;
             display = numberFirst * numberSecond;
             result.innerText = display;
+            isResultSetup = true;
         }
 
         if(operator == "÷") {
+            numberThird = numberFirst / numberSecond;
             display = numberFirst / numberSecond;
             result.innerText = display;
+            isResultSetup = true;
         }
+    }
+
+    // Result of new itteration
+    if(e.target.innerText == "=" && isResultSetup == true) {
+        // Tell JS that secondNumber is setup and do cleanup
+        tempArray = [];
+        numberFirst = numberThird;
+        isNumberFirstSetup = true;
     }
         
   
