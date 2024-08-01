@@ -18,6 +18,7 @@ function refreshDisplay() {
 isNumberFirstSetup = false;
 isNumberSecondSetup = false;
 isOperatorSetup = false;
+let tempArray = [];
 
 calculator.addEventListener("click", (e) => {
     // First Number
@@ -31,7 +32,30 @@ calculator.addEventListener("click", (e) => {
         e.target.id != "calculator__result"
     )
     {
-        console.log("number");
+        tempArray.push(e.target.innerText);
+        console.log(tempArray);
+    } else if(
+        e.target.innerText == "+" ||
+        e.target.innerText == "-" ||
+        e.target.innerText == "x" ||
+        e.target.innerText == "÷"
+    )
+    {
+        // Create first number until user setup operator
+        console.log("time for operator");
+        numberFirst = tempArray.reduce((accumulator, currentValue) => {
+            return accumulator =+ currentValue;
+        });
+        refreshDisplay()
+        tempArray = [];
+        isNumberFirstSetup = true;
+
+
+        //  Setup operator
+        operator = e.target.innerText;
+        refreshDisplay()
+        tempArray = [];
+        isOperatorSetup = true;
     }
         
     // Operator
@@ -44,6 +68,7 @@ calculator.addEventListener("click", (e) => {
         numberFirst = 0;
         numberSecond = 0;
         operator = "";
+        tempArray = [];
         refreshDisplay();
         isNumberFirstSetup = false;
         isNumberSecondSetup = false;
