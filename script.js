@@ -2,8 +2,8 @@
 let calculator = document.querySelector(".calculator");
 let result = document.querySelector("#calculator__result");
 
-let numberFirst = 0;
-let numberSecond = 0;
+let numberFirst = "";
+let numberSecond = "";
 let operator = "";
 let display = `${numberFirst} ${operator} ${numberSecond}`;
 result.innerText = display;
@@ -103,8 +103,8 @@ calculator.addEventListener("click", (e) => {
   
     // Clear
     if(e.target.innerText == "CLEAR") {
-        numberFirst = 0;
-        numberSecond = 0;
+        numberFirst = "";
+        numberSecond = "";
         operator = "";
         tempArray = [];
         refreshDisplay();
